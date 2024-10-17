@@ -23,9 +23,7 @@ run_setup_js_script() {
 
 main() {
   local repo_dir=$(pwd)
-  clone_lazyvim_installer_repo || log_failure "Failed to clone LazyVim Ubuntu Installer repository"
-  run_setup_js_script || log_failure "Failed to run setup.js script"
-  cd "$repo_dir" || log_failure "Failed to navigate back to the repo directory"
+  snap install --classic neovim
 }
 
 main
