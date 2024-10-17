@@ -61,7 +61,7 @@ install_alacritty() {
 
 create_alacritty_desktop_icon() {
   log_info "Step: Creating Alacritty desktop icon..."
-  cat > /usr/share/applications/alacritty.desktop <<EOF
+  sudo cat > /usr/share/applications/alacritty.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Name=Alacritty
@@ -113,7 +113,7 @@ download_alacritty_icon() {
   local icon_url="https://raw.githubusercontent.com/alacritty/alacritty/master/extra/logo/alacritty-term.svg"
   local icon_path="/usr/share/icons/hicolor/scalable/apps/alacritty.svg"
 
-  if ! wget -O "$icon_path" "$icon_url"; then
+  if ! sudo wget -O "$icon_path" "$icon_url"; then
     log_failure "Failed to download Alacritty icon"
   fi
 
