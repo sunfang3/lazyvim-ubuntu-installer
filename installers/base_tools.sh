@@ -11,6 +11,11 @@ update_package_lists() {
   log_success "Package lists updated"
 }
 
+install_mise() {
+  log_installing "Mise"
+  curl https://mise.run | sh
+  log_success "Mise installed"
+}
 install_git() {
   if ! command -v git &> /dev/null; then
     log_installing "Git 2+"
@@ -24,8 +29,7 @@ install_git() {
 install_nodejs() {
   if ! command -v node &> /dev/null; then
     log_installing "Node.js 20.x"
-    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-    sudo apt install -y nodejs
+    mise use node@lts
     log_success "Node.js 20.x installed"
   else
     log_installed "Node.js"
@@ -35,7 +39,7 @@ install_nodejs() {
 install_yarn() {
   if ! command -v yarn &> /dev/null; then
     log_installing "Yarn"
-    sudo npm install -g yarn
+    npm install -g yarn
     log_success "Yarn installed"
   else
     log_installed "Yarn"
@@ -45,7 +49,7 @@ install_yarn() {
 install_bun() {
   if ! command -v bun &> /dev/null; then
     log_installing "Bun"
-    sudo npm install -g bun
+    curl -fsSL https://bun.sh/install | bash
     log_success "Bun installed"
   else
     log_installed "Bun"
@@ -55,6 +59,7 @@ install_bun() {
 main() {
   update_package_lists || log_failure "Failed to update package lists"
   install_git || log_failure "Failed to install Git"
+  install_mise || log_failure "Failed to install Mise"
   install_nodejs || log_failure "Failed to install Node.js"
   install_yarn || log_failure "Failed to install Yarn"
   install_bun || log_failure "Failed to install Bun"
