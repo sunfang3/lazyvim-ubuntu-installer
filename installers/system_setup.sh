@@ -6,10 +6,7 @@ project_root="$(dirname "$script_dir")"
 source "$project_root/utils/shell_logger.sh"
 
 bashrc_lines=(
-  'alias code="code --user-data-dir /root/.vscode-root --no-sandbox"'
   'alias ala="alacritty"'
-  'export PATH="$PATH:/root/tools/bun/bin"'
-  'export PATH="$PATH:/root/tools/alacritty"'
   'export ALACRITTY_CONFIG="~/.config/alacritty/alacritty.toml"'
   'sudo service xrdp start'
   'sudo service dbus start'
